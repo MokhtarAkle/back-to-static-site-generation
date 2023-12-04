@@ -36,7 +36,7 @@ Om het werk toe te kunnen voegen aan het project zal er gemerged moeten worden. 
 Zodra het mergen succesvol is gelukt, zorgt iedereen ervoor dat ze via Github Desktop hun branche updaten van de main. Zo heeft iedereen de recentste versie in hun branche en minimaliseert de kans dat er een conflict ontstaat bij de volgende merge.
 
 ## Weekly stand-up
-Wekelijks houden we een stand-up en bespreken we de tussentijdse stand. Zo updaten we het Github project bord en wanneer een teamlid een story gereed heeft, vertelt die welke die wilt oppakken. Dit doen we elke maandag om half 1 voor de college.
+Wekelijks houden we een stand-up en bespreken we de tussentijdse stand. Zo updaten we het Github project bord en wanneer een teamlid een story gereed heeft, vertelt die welke die wilt oppakken. Dit doen we elke maandag, woensdag en vrijdag na het college.
 
 ## Documentatie
 Om het project zo begrijpbaar mogelijk maken voor externen en ontwikkelaars die met dit project aan de slag willen gaan, willen we een zo duidelijk mogelijke documentatie schrijven. 
