@@ -1,61 +1,80 @@
-
-# Back to Static - Static Site Generation
-
-Ontwikkel een statisch gegenereerde website voor een opdrachtgever.
+# Don't Repeat Yourself - Component Library
+Ontwikkel een website voor een opdrachtgever op basis van een component library.
 
 ## Context
+Deze leertaak hoort bij sprint 16 Don't Repeat Yourself. Dit is een opdracht die je deels individueel en deels als team uitvoert voor een opdrachtgever.
 
-Deze leertaak hoort bij sprint 17 Back to Static. Dit is een leertaak die je in een team uitvoert.
+Bij deze leertaak hoort de deeltaak:
 
-Bij de sprintplanning krijg je uitleg over hoe je statische web pagina's kan genereren met SvelteKit en wordt de opdracht uitgelegd.
-
-Bij deze leertaak hoort voor elk teamlid 3x de deeltaak:
-- [Creative coding](https://github.com/fdnd-task/back-to-static-creative-coding)
+* [Component Building Block](https://github.com/fdnd-task/dont-repeat-yourself-component-building-block)
 
 ## Doel van deze opdracht
-
-Je leert wat Static Site generation is, wat de voor- en nadelen zijn en hoe je dit kunt toepassen.
+Je leert hoe je herbruikbare stukken code op een systematische manier ontsluit zodat jij en jouw mede frontenders ze kunnen gebruiken in andere projecten.
 
 ## Werkwijze
+Bij elke leertaak wordt de development-lifecycle doorlopen. Hierdoor ontwikkel je een standaard aanpak voor frontend praktijkvraagstukken, werk je systematisch aan leertaken, ervaar je de relevantie van het geleerde en verwerf je de kennis, houding en vaardigheden die de beroepspraktijk van je vraagt. De development lifecycle bestaat uit de stappen: Analyseren, Ontwerpen, Bouwen, Integreren en Testen.
 
-Deze opdracht gaat over de DLC fases **Analyseren**, **Bouwen** en **Integreren** 
+De component library (letterlijk: een bibliotheek met componenten) die je gaat maken bestaat uit een serie herbruikbare bouwblokken voor een opdrachtgever in een apart project. Het voordeel van het gebruiken van een component library is dat alle projecten die voor deze opdrachtgever gemaakt worden terug kunnen verwijzen naar dezelfde component library. 
 
-### Analyseren
+Door op deze manier te werken wordt de *developer experience* (hierna DX) beter omdat: 
+1. Uniformiteit wordt afgedwongen
+2. Atomic Design wordt omarmd
+3. Herhaling niet meer hoeft (DRY!)
+4. Bugs oplossen eenvoudiger wordt
+5. Samenwerken makkelijker wordt
 
-Onderzoek en bespreek binnen jouw team welke wijze van deployment voor jullie opdracht het beste past. Is dat client-side, server-side, static-site rendering of een combinatie daarvan. Noteer je overweging in de wiki.
+Het omarmen van deze ontwikkelstrategie vereist wel enig schakelen in de manier waarop je over code denkt. Het wordt abstracter omdat er meer afhankelijkheden en abstracties in je code gaan plaatsvinden. Je gaat denken in termen van NPM packages in plaats van in componenten in één repository. Waarschijnlijk heb je vorige sprints de kracht van componenten in een lokaal project al ontdekt, nu is het tijd om externe componenten in te laden!
 
-We onderzoeken in de volgende stappen in ieder geval het voordeel van SSG ten opzichte van SSR, ongeacht of je dit later daadwerkelijk gaat gebruiken.
+### Aanpak
 
-### Bouwen
+In deze leertaak vind je slechts een partiële instructie, namelijk voor het [opzetten van de structuur](#structuur-opzetten-team) die nodig is om een component library als project in NPM te krijgen. Als dit gelukt is begint eigenlijk de leertaak pas. Je gaat je component library inzetten bij de [doorontwikkeling van projecten](#doorontwikkeling-individueel) (lees user-stories) voor jouw opdrachtgever.
 
-De website die je gebouwd heb maakt tot nu toe gebruik van *server side rendering*. Elke keer dat een bezoeker van de website een pagina bezoekt wordt een request naar de server gedaan en rendered de server de betreffende pagina alvorens een response naar de browser van de eindgebruiker te sturen. Aangezien de server de data uit een API moet ophalen (via bijv. een headless cms), kan het even duren voordat de pagina gerendered is. 
+#### Structuur opzetten (team)
 
-Om te onderzoeken of dit efficiënter kan gaan we de website van te voren renderen zodat er na een request van een bezoeker alleen maar statische HTML, CSS en JavaScript hoeft worden teruggestuurd en we dus de *build* fase overslaan.
+Het opzetten van de structuur voor een component library is een beetje een gedoe maar het loont als je dit eenmaal gedaan hebt.
 
-#### Aanpak
+1. Fork deze leertaak, in deze leertaak ga je de implementatie van de component library maken. Met andere woorden, je linkt in deze repository een andere repository welke de component library bevat.
+2. Maak een nieuwe repository aan op jouw GitHub omgeving, geef deze een logische naam, bijvoorbeeld: fdnd-components, bij de volgende stappen staat *CLib* als het om deze ‘andere’ repository gaat.
+3. *CLib* Initialiseer een nieuw SvelteKit library project!
+4. *CLib* Check package.json voor de benodigde scripts. Als alles gelukt is zie je het commando `package` bij het lijstje staan.
+5. *CLib* Maak om te testen een nieuw eenvoudig component aan in de /src/lib map, bijvoorbeeld `HelloWorld.svelte`
+6. *CLib* Roep het commando `npm run package` aan om in de repository een package klaar te zetten.
+7. *CLib* Bekijk de nieuw gegenereerde map `/package`
+8. *CLib* Pas in de gegenereerde `package.json` de belangrijke velden aan, zoals `name`, `version`, `description`, enzovoorts.
+9. *CLib* Publiceer gegenereerde package (dus niet het hele project!) als *scoped public package* via npm (zie bronnen). Het kan goed zijn dat je eerst een gebruiker en een organisatie moet aanmaken.
+10. Check npmjs.com en zoek jouw organisatie/package (supertof!)
+11. Initialiseer een SvelteKit skeletten project.
+11. Link jouw package als dependancy door `npm install organisatie/package` uit te voeren.
+12. Importeer jouw component door `import { HelloWorld } from 'organisatie/package`, zet het ergens neer met `<HelloWorld />` en test of het werkt.
+13. Ga verder bij [Doorontwikkeling](#doorontwikkeling-individueel)
 
-1. Meet van de homepage van de huidige server side gerenderde webiste de _response tijd_ en het aantal _kilobytes_ dat in de response wordt meegestuurd. Doe deze test op jouw localhost en kijk hiervoor in de _Dev Tools > Network Tab_ met een _Throttle_ van bijvoorbeeld _Slow 3G_.
-2. Maak een branch aan, bijvoorbeeld _static-site_.
-3. Zoek uit hoe je in het door jou gebruikte framework de website statisch gegenereerd kan worden. En pas je code aan volgens de instructies.
-4. Maak op jouw localhost een *build* van de website en documenteer in je wiki de *response tijd* en het aantal *kilobytes* dat in nu de response wordt meegestuurd voor de homepage.
+##### Bronnen:
+- [Don’t Repeat Yourself](http://wiki.c2.com/?DontRepeatYourself)
+- [SvelteKit](https://kit.svelte.dev/) voor het opstartscript
+- [svelte-package](https://kit.svelte.dev/docs/packaging) voor het verpakken van de componenten uit `/src/lib` in een nieuwe package. N.B.: Je krijgt een melding dat de package `svelte2tsx` geïnstalleerd moet worden, dat kan je doen met `npm install -D svelte2tsx`
+- [How to Create Svelte Component Libraries with SvelteKit (iets verouderd!)](https://medium.com/mkdir-awesome/how-to-create-svelte-component-libraries-with-sveltekit-98fd2ff12f0f)
+- [npm Docs](https://docs.npmjs.com/)
+- [Creating and publishing scoped public packages](https://docs.npmjs.com/creating-and-publishing-scoped-public-packages)
+- [How to Publish Your First npm Package](https://bretcameron.medium.com/how-to-publish-your-first-npm-package-b224296fc57b)
+- [How to publish packages to npm (the way the industry does things)](https://zellwk.com/blog/publish-to-npm/)
 
-### Integreren
+#### Doorontwikkeling (individueel)
 
-Nu de website statisch gegeneerd wordt, publiceer je de website en zorg je er voor dat bij een verandering van de content of de code de website opnieuw gebuild wordt (continuous deployment). Hiervoor maak je gebruik van GitHub Actions of zet je bijvoorbeeld Netlify in.
+Als de structuur staat kan je verder gaan aan de ontwikkeling voor jouw opdrachtgever. Eventueel kan je wat tijd besteden aan het overhevelen van herhaalde stukken code uit je oude projecten maar dat hoeft niet per se, je kunt ook opnieuw beginnen.
 
-#### Aanpak
-1. Publiceer je website met bijvoorbeeld Netlify. Nu je statische pagina's publiceert kan je ook met een GitHub action automatisch de site laten builden bij een update van de code.
-2. Zoek uit hoe je na een aanpassing van de content in het headless cms, automatisch een nieuwe build kunt laten maken.
+1. Kies een user story uit de backlog van het project waar je aan gaat werken. De projecten staan bij [FDND Agency](https://github.com/fdnd-agency).  
+2. Kopieer/plak de user story waar jij aan gaat werken naar de Wiki van de geforkte repository, dit ga je ontwerpen en maken
+3. Documenteer je proces a.h.v de development life cycle
+4. En schrijf een goede readme
+5. Ga terug naar 1 tot de sprint voorbij is.
 
 ## Criteria
 
-Focus sprint # - De focus van deze sprint ligt op het statisch genereren van een website.
 
 Deze opdracht is done als:
-- [ ] jouw code een statische website *‌build*;
-- [ ] de statische website online te bekijken is;
-- [ ] je het verschil in respons tijd en het het verschil in kilobytes gedocumenteerd hebt in je wiki.
-- [ ] (optioneel) jouw code automatisch opnieuw *gebuild* wordt en gepubliceerd wordt naar de live site bij een push naar GitHub of na een update van de content(continuous deployment);
-- [ ] maak een keuze voor de deployment van jouw site en onderbouw in je wiki waarom dit de beste optie is
 
+- [ ] je een component library hebt gemaakt.
+- [ ] je hebt gewerkt volgens de verschillende fases van de development-lifecycle
+- [ ] je hebt je werk gedocumenteerd in de Readme en Wiki (user story, ontwerpbeslissingen, schetsen en code voorbeelden)
+- [ ] de website op Github staat en een live url heeft
 
