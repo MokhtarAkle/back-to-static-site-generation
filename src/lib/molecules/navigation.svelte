@@ -14,7 +14,7 @@
 		<NavLogo />
 
 		<ul>
-			<button class="Menu" on:click={openMobileMenu}>Menu</button>
+			<button class="Menu" on:click={openMobileMenu}> {mobileDropdownActive ? 'X' : 'Menu'}</button>
 			{#if mobileDropdownActive}
 				<!-- {#each Link as Item} -->
 				<Link href="/berichten" title="berichten"></Link>
@@ -52,8 +52,6 @@
 		justify-content: space-between;
 		scroll-snap-type: x mandatory;
 	}
-
-
 
 	.nav-bar {
 		min-width: 59em;
