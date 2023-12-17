@@ -4,41 +4,41 @@ import { hygraph } from '$lib/utils/hygraph.js';
 export async function load({ params }) {
 	const { id } = params;
 
-  let query = gql`
-    query getWish($id: ID!) {
-      wish(where: { id: $id }) {
-        id
-        heading
-        description
-        date
-        label
-        image {
-          url
-        }
-      }
-      statusUpdates {
-        date
-        comment {
-          text
-        }
-        uid
-        id
-      }
-    }
-  `;
+	let query = gql`
+		query getWish($id: ID!) {
+			wish(where: { id: $id }) {
+				id
+				heading
+				description
+				date
+				label
+				image {
+					url
+					image {
+						url
+					}
+				}
+			}
+			statusUpdates {
+				date
+				comment {
+					text
+				}
+				uid
+				id
+			}
+		}
+	`;
 
-
-  const variables = { id };
+	const variables = { id };
 
 	const request = await hygraph.request(query, variables);
 
-  return {
-  
-      wish: request.wish, // Hier halen we de enkele wens op
-      statusupdates: request.statusUpdates
-  };
+	return {
+		wish: request.wish, // Hier halen we de enkele wens op
+		statusupdates: request.statusUpdates
+	};
 }
-
 
 // export async ({ body }, res) => {
 //   const hygraph = new GraphQLClient(
