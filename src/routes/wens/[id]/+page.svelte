@@ -3,12 +3,13 @@
 	import Reactie from '$lib/components/reacties/reactie.svelte';
 	import Rollen from '$lib/components/detailpagina/rollen.svelte';
 	import Status from '$lib/molecules/status.svelte';
+	import Sdg from '$lib/molecules/sdg.svelte';
 	import { writable } from 'svelte/store';
 
 	export let data;
 	export const test = writable(1);
 
-	console.log(data);
+	// console.log(data);
 </script>
 
 <Navbar />
@@ -52,14 +53,8 @@
 			Geplaatst op: {data.wish.date}</time
 		>
 		<p>{data.wish.description}</p>
-		<section class="container-susDevGoal">
-			<img
-				class="susDevGoal"
-				src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Sustainable_Development_Goal_01NoPoverty.svg/599px-Sustainable_Development_Goal_01NoPoverty.svg.png"
-				alt="sustainable development goal 1"
-			/>
-			<img class="susDevGoal" src={data.wish.image.image.url} alt="Sustainable development goals" />
-		</section>
+
+		<Sdg {data} />
 		<Rollen />
 		<Status {data} />
 	</section>
