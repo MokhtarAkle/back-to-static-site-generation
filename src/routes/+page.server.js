@@ -19,6 +19,9 @@ export async function load() {
       label
       image {
         url
+        image {
+          url
+        }
       }
     }
   }

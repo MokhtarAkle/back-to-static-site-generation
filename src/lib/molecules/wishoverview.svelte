@@ -2,6 +2,7 @@
 	import WishHeading from '$lib/atoms/wish-heading.svelte';
 	import WishImage from '$lib/atoms/wish-image.svelte';
 
+	
 	export let wish;
 </script>
 
@@ -13,6 +14,7 @@
 		</a>
 		<p>Geplaatst op: {wish.date}</p>
 		<p>Supporters: <span>4</span></p>
+		<img class="susDevGoal" src={wish.image.image.url} alt="Sustainable development goals" />
 	</div>
 </li>
 
@@ -25,6 +27,12 @@
         list-style: none;
 	}
 
+	.susDevGoal {
+		max-width: 100px;
+		max-height: 100px;
+		margin: 1em;
+	}
+	
     .grid-overview li {
 		width: 20rem;
     }

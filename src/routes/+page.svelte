@@ -41,7 +41,7 @@
     <section id="custom-view" class="grid-overview wishes">
         <article>
             {#each filteredWishes as wish}
-                <WishOverview {wish} {filteredWishes} />
+                <WishOverview {wish} {filteredWishes} {data}/>
             {/each}
         </article>
     </section>
